@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>连续输出</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function newFun(a){
+        return function(a){
+            console.log(a)
+        }
+    }
+    function fun(a) {
+        console.log(a)
+        let brandNewFun = newFun(((a)=>{
+            console.log(a)
+        })(a))(a);
+        
+    }
+    fun(1);
+    var a = [
+        {
+            id: 1,
+            name: '...'  
+        },
+        {
+            id: 2,
+            name: '...'
+        }
+        ]
+        var b = [
+        {
+            id: 1,
+            age: 10
+        },
+        {
+            id: 2,
+            age: 10
+        }
+    ];
+    a.map( (item, index) => Object.assign(item, b.find( itemb => itemb.id === item.id)) )
+</script>
+</html>
