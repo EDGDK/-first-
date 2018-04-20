@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS3 animation渐进实现点点点等待提示效果</title>
+    <style>
+        .dotting{
+            display: inline-block;
+            width: 10px;
+            min-height: 2px;
+            padding-right: 2px;
+            border-left: 2px solid currentColor; border-right: 2px solid currentColor;   
+            background-color: currentColor; background-clip: content-box;
+            box-sizing: border-box;
+            animation: dot 4s infinite step-start both;
+            /* *zoom: expression(this.innerHTML = '...'); IE7 */
+        }
+        .dotting:before{content:'...'}/*IE8*/
+        .dotting::before{content:''}
+        :root .dotting{margin-left: 2px;padding-left:2px;}
+        @keyframes dot {
+            25% { border-color: transparent; background-color: transparent; }          /* 0个点 */
+            50% { border-right-color: transparent; background-color: transparent; }    /* 1个点 */
+            75% { border-right-color: transparent; }                                   /* 2个点 */
+        }
+        div{ display: inline-block;color:aqua;}
+
+        @supports (display:none) {
+            dot {
+                display: inline-block; 
+                width: 3ch;
+                text-indent: -1ch;
+                vertical-align: bottom; 
+                overflow: hidden;
+                animation: dot 3s infinite step-start both;
+                font-family: Consolas, Monaco, monospace;
+                
+            }
+        }
+        @keyframes dot {
+            33% { text-indent: 0; }
+            66% { text-indent: -2ch; }
+        }
+        a{text-decoration: none;}
+        .grebtn {
+            display: inline-block;
+            padding: 0.25em 1.25em;
+            border: 1px solid;
+            border-radius: 2px;
+            vertical-align: bottom;
+            font-weight: inherit;
+            border-color: #208000 #1F7F00;
+            background-color: #289600;
+            box-shadow: inset 0 0 1px rgba(255,255,255,.6), 0 1px #8DBF62;
+            color: #fff;
+            text-shadow: 0 -1px #137900;
+        }
+    </style>
+</head>
+<body>
+    <div>加载中</div><span class="dotting"></span>
+    <a href="javascript:" class="grebtn">订单提交中<dot>...</dot></a>
+</body>
+</html>
